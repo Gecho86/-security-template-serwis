@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:replace="fragments :: styleLinks" th:remove="tag"></th:block>
+    <meta charset="UTF-8">
+    <title>Todo task form</title>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator" th:remove="tag"></th:block>
+
+<form th:action="@{/task/user}" method="post">
+    <div class="content-container">
+        <div class="container">
+            <div class="row col-12">
+                <div class="row col-12">
+                    <h1>Choose user</h1>
+                </div>
+                <div th:if="${errorMessage != null}" class="row col-12">
+                    <div class="alert alert-danger col-12" role="alert">
+                        <p th:text="${errorMessage}"></p>
+                    </div>
+                </div>
+                <div class="row col-12">
+                    <div class="col-6">
+                        <label for="user">User:</label>
+                    </div>
+                    <div class="col-6">
+                        <select name="selectedUser">
+                            <option th:each="user : ${accounts}" th:text="${user.getUsername()}" th:value="${user.getUsername()}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row col-12">
+                    <div class="col-6">
+                    </div>
+                    <div class="col-6">
+                        <input class="form-control" type="submit">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<th:block th:replace="fragments :: footer" th:remove="tag"></th:block>
+<th:block th:replace="fragments :: jsScripts" th:remove="tag"></th:block>
+</body>
+</html>
